@@ -1,14 +1,26 @@
 const arr = [1, 2, 3, 4, 1, 0, 2, 2];
 
 const divide = (arr, n) => {
-	let ch = [];
-	let c = arr.length;
+	let result = [];
+	let current = [];
+	let sum = 0;
 
-	for (let i = 0; i < c; i += n) {
-		ch.push(arr.slice(i, i + n));
+	for (let i = 0; i < arr.length; i++) {
+		if (sum + arr[i] <= n) {
+			current.push(arr[i]);
+			sum += arr[i];
+		} else {
+			result.push(current);
+			current = [arr[i]];
+			sum = arr[i];
+		}
 	}
 
-	return ch;
+	if (current.length) {
+		result.push(current);
+	}
+
+	return result;
 };
 
 const n = Number(prompt("Enter n: "));
